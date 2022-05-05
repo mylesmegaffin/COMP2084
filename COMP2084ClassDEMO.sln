@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32413.511
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COMP2084ClassDEMO", "COMP2084ClassDEMO\COMP2084ClassDEMO.csproj", "{58003F43-389C-4239-BDA3-054D6145ECD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58003F43-389C-4239-BDA3-054D6145ECD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58003F43-389C-4239-BDA3-054D6145ECD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58003F43-389C-4239-BDA3-054D6145ECD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58003F43-389C-4239-BDA3-054D6145ECD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E44767DE-D3DB-42B2-87DC-B0A716A811F6}
+	EndGlobalSection
+EndGlobal
