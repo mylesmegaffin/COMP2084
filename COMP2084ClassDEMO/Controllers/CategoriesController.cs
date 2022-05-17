@@ -32,5 +32,11 @@ namespace COMP2084ClassDEMO.Controllers
             // load the view /Views/Categories/Browse
             return View();
         }
+
+        public IActionResult AddCategory()
+        {
+            // display an empty form where a user could add a new category
+            return View();
+        }
     }
 }
