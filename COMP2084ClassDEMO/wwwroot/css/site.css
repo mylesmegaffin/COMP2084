@@ -69,3 +69,8 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Overriding Bootstrap css to make img-thumbnail smaller*/
+.img-thumbnail {
+    width: 75px
+}

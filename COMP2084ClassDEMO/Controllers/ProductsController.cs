@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using COMP2084ClassDEMO.Data;
 using COMP2084ClassDEMO.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace COMP2084ClassDEMO.Controllers
 {
@@ -58,10 +60,34 @@ namespace COMP2084ClassDEMO.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,CategoryId,Photo,Description")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,CategoryId,Description")] Product product, IFormFile Photo)
         {
             if (ModelState.IsValid)
             {
+                // check for and process a photo upload
+                // ! we must do this before we call add and save otherwise we wont have the file name saved to our database
+                if(Photo.Length > 0)
+                {
+                    //get temp location of uploaded file
+                    var tempFile = Path.GetTempFileName();
+
+                    // Create a unique name using the Globally Unique ID (GUID) class
+                    // e.g. mypic.jpeg -> abc123-mypic.jpeg
+                    var fileName = Guid.NewGuid() + "-" + Photo.FileName;
+
+                    // Set destination dynamically path and file name
+                    // (we want the path to be dynamic because once uploaded to the server the path might not be the same)
+                    // the single \ is an escape char in a string in C#
+                    var uploadPath = System.IO.Directory.GetCurrentDirectory() + "\\wwwroot\\img\\product-uploads\\" + fileName;
+
+                    // use a stream to create the new file
+                    using var stream = new FileStream(uploadPath, FileMode.Create);
+                    // this copys the file 
+                    await Photo.CopyToAsync(stream);
+
+                    // add unique file name as the Photo property of the new product object
+                    product.Photo = fileName;
+                }
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

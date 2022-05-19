@@ -41,7 +41,12 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Photo)
+                <!-- If there is an image display it-->
+                @if(item.Photo != null)
+                {
+                    <!-- Image tag will display the item's photo -->
+                    <img src="~/img/product-uploads/@item.Photo" alt="Product Image" class="img-thumbnail" />
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
