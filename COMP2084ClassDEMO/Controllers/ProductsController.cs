@@ -23,7 +23,8 @@ namespace COMP2084ClassDEMO.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Products.Include(p => p.Category);
-            return View(await applicationDbContext.ToListAsync());
+            //OrderBy(p => p.Name) ordering by the ProductName not by the ProductId(default)
+            return View(await applicationDbContext.OrderBy(p => p.Name).ToListAsync());
         }
 
         // GET: Products/Details/5
@@ -48,7 +49,7 @@ namespace COMP2084ClassDEMO.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.Categories.OrderBy(c => c.Name), "Id", "Name");
             return View();
         }
 
