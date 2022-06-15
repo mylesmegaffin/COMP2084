@@ -9,9 +9,11 @@ using COMP2084ClassDEMO.Data;
 using COMP2084ClassDEMO.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace COMP2084ClassDEMO.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;

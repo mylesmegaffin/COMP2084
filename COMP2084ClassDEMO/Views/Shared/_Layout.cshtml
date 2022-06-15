@@ -25,7 +25,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Shop Now</a>
                         </li>
                         <!-- Only able to view if you are a authenicated user -->
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.IsInRole("Administrator")) 
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>

@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace COMP2084ClassDEMO.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
