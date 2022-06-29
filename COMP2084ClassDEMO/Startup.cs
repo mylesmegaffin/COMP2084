@@ -33,6 +33,16 @@ namespace COMP2084ClassDEMO
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //Enable Google Auth
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfiguration googleAuthNSection = Configuration.GetSection("Authentication:Google");
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                });
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
