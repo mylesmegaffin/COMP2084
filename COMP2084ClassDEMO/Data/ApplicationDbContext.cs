@@ -12,6 +12,7 @@ namespace COMP2084ClassDEMO.Data
         // reference each Model
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
