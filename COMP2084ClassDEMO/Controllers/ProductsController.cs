@@ -32,6 +32,7 @@ namespace COMP2084ClassDEMO.Controllers
         }
 
         // GET: Products/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

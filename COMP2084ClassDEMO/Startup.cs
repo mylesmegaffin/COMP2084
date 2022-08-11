@@ -43,6 +43,9 @@ namespace COMP2084ClassDEMO
                     options.ClientSecret = googleAuthNSection["ClientSecret"];
                 });
 
+            //enable sessions
+            services.AddSession();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
@@ -68,6 +71,9 @@ namespace COMP2084ClassDEMO
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            // sessions support
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
