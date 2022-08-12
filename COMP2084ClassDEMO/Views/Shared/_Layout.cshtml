@@ -25,7 +25,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Shop" asp-action="Index">Shop Now</a>
                         </li>
                         <!-- Only able to view if you are a authenicated user -->
-                        @if (User.IsInRole("Administrator")) 
+                        @if (User.IsInRole("Administrator"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
@@ -34,6 +34,9 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                             </li>
                         }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Shop" asp-action="Cart">Cart</a>
+                        </li>
                     </ul>
                 </div>
             </div>
