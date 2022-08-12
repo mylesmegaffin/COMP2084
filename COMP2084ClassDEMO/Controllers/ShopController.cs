@@ -2,6 +2,7 @@
 using COMP2084ClassDEMO.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,7 +69,7 @@ namespace COMP2084ClassDEMO.Controllers
         private string GetCustomerId()
         {
             //is there already a session variable holding an identifier for this customer?
-            if(HttpContext.Session.GetString("CustomerId") == null)
+            if (HttpContext.Session.GetString("CustomerId") == null)
             {
                 //cart is empty, user is unknown
                 // the users is putting there first item in the cart
@@ -83,6 +84,19 @@ namespace COMP2084ClassDEMO.Controllers
 
             // return the CUstomerId to the AddToCart method
             return HttpContext.Session.GetString("CustomerId");
+        }
+
+        //Shop/Cart
+        public IActionResult Cart()
+        {
+            //get CustomerId from the session variable
+            var customerId = HttpContext.Session.GetString("CustomerId");
+
+            // get items in this customers cart from the database - add a refernece to the parent object: Product
+            var cartItems = _context.Carts.Include(c => c.Product).Where(c => c.CustomerId == customerId).ToList();
+
+            // load the cart page and display the customer's items
+            return View(cartItems);
         }
     }
 }
