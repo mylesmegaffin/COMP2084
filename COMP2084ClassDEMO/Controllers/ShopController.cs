@@ -47,18 +47,32 @@ namespace COMP2084ClassDEMO.Controllers
             // identify the customer
             var customerId = GetCustomerId();
 
-            //creat a new Cart object
-            var cart = new Cart
-            {
-                ProductId = ProductId,
-                Quantity = Quantity,
-                Price = price,
-                CustomerId = customerId,
-                DateCreated = DateTime.Now
-            };
+            // check if the product a;ready exists in this user's cart
+            var cartItem = _context.Carts.SingleOrDefault(c => c.ProductId == ProductId && c.CustomerId == customerId);
 
-            // use the Cart DbSet in ApplicationContext.cs to save to the datebase
-            _context.Carts.Add(cart);
+            if (cartItem != null)
+            {
+                // If Product already exists that update the quantity
+                cartItem.Quantity += Quantity;
+                _context.Update(cartItem);
+            }
+            else
+            {
+                // If Product doesnt exist than add the product to the cart
+                //creat a new Cart object
+                var cart = new Cart
+                {
+                    ProductId = ProductId,
+                    Quantity = Quantity,
+                    Price = price,
+                    CustomerId = customerId,
+                    DateCreated = DateTime.Now
+                };
+
+                // use the Cart DbSet in ApplicationContext.cs to save to the datebase
+                _context.Carts.Add(cart);
+
+            }
             //saves to the database
             _context.SaveChanges();
 
