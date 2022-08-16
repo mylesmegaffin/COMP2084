@@ -98,5 +98,21 @@ namespace COMP2084ClassDEMO.Controllers
             // load the cart page and display the customer's items
             return View(cartItems);
         }
+
+        // GET: /Shop/RemoveFromCart/12
+        public IActionResult RemoveFromCart(int id)
+        {
+            // remove selected item from the Carts table
+            var cartItem = _context.Carts.Find(id);
+
+            if (cartItem != null)
+            {
+                _context.Carts.Remove(cartItem);
+                _context.SaveChanges();
+            }
+
+            // redirect to the updated Cart page
+            return RedirectToAction("Cart");
+        }
     }
 }
