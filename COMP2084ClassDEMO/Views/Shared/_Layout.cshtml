@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,7 +14,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/img/logo.png" alt="Myles Logo for Get Me A Game Website" width="50" height="50"/>
+                    <img src="~/img/logo.png" alt="Myles Logo for Get Me A Game Website" width="50" height="50" />
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -34,9 +36,16 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Shop" asp-action="Cart">Cart</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Shop" asp-action="Cart">
+                            Cart
+                            @if (Context.Session.GetInt32("ItemCount") != 0)
+                            {
+                                <span class="badge badge-primary">@Context.Session.GetInt32("ItemCount")</span>
+
+                            }
+                        </a>
+                    </li>
                     </ul>
                 </div>
             </div>

@@ -50,6 +50,7 @@ namespace COMP2084ClassDEMO.Controllers
             // check if the product a;ready exists in this user's cart
             var cartItem = _context.Carts.SingleOrDefault(c => c.ProductId == ProductId && c.CustomerId == customerId);
 
+
             if (cartItem != null)
             {
                 // If Product already exists that update the quantity
@@ -108,6 +109,10 @@ namespace COMP2084ClassDEMO.Controllers
 
             // get items in this customers cart from the database - add a refernece to the parent object: Product
             var cartItems = _context.Carts.Include(c => c.Product).Where(c => c.CustomerId == customerId).ToList();
+
+            //count the number of items in the Cart and write to a session variable to display in the navbar
+            var itemCount = (from c in _context.Carts where c.CustomerId == customerId select c.Quantity).Sum();
+            HttpContext.Session.SetInt32("ItemCount", itemCount);
 
             // load the cart page and display the customer's items
             return View(cartItems);
